@@ -1,0 +1,83 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="border p-4 shadow rounded">
+        <h3 class="text-center mb-4">Login</h3>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            formControlName="email"
+            [class.is-invalid]="email?.invalid && email?.touched" />
+          <div class="invalid-feedback" *ngIf="email?.errors?.['required']">
+            Email is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="email?.errors?.['email']">
+            Enter a valid email address.
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            formControlName="password"
+            [class.is-invalid]="password?.invalid && password?.touched" />
+          <div class="invalid-feedback" *ngIf="password?.errors?.['required']">
+            Password is required.
+          </div>
+        </div>
+
+        <!-- Role Selection -->
+        <div class="mb-3">
+        <label for="role" class="form-label">Select Role</label>
+        <ng-select
+            [items]="roles"
+            bindLabel=""
+            bindValue=""
+            placeholder="Choose role"
+            formControlName="role"
+            [class.is-invalid]="role?.invalid && role?.touched">
+        </ng-select>
+        <div class="invalid-feedback" *ngIf="role?.errors?.['required']">
+            Role is required.
+        </div>
+        </div>
+       
+
+        <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">
+          Login
+        </button>
+      </form>
+
+      
+    </div>
+  </div>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
