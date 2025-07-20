@@ -9,13 +9,14 @@ import { AssignPaycodeComponent } from './views/dashboard/modals/assign-paycode/
 import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { FlatpickrDirective, provideFlatpickrDefaults } from 'angularx-flatpickr';
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     AssignShiftComponent,
-    AssignPaycodeComponent
+    AssignPaycodeComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -23,12 +24,17 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgSelectModule
-    
-    
+    NgSelectModule,
+    FlatpickrDirective
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+     provideFlatpickrDefaults({
+      dateFormat: 'd-M-Y',
+      altInput: true,
+      altFormat: 'd-M-Y',
+      allowInput: true
+    }) 
   ],
   bootstrap: [AppComponent]
 })
