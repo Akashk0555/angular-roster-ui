@@ -15,9 +15,9 @@
                     <div class="col-12 col-sm-6 col-md-4">
                         <div class="mb-3">
                             <label class="form-label required">Pay Code Name</label>
-                            <ng-select [items]="employees"
-                            bindLabel="name"
-                            bindValue="id"
+                            <ng-select [items]="paycode"
+                            bindLabel="paycodename"
+                            bindValue="paycodename"
                             name="paycodename"
                             formControlName="paycodename"
                             placeholder="Select Pay Code"
@@ -26,14 +26,8 @@
                             </ng-select>
                         </div>
                         
-                        <div class="mb-3">
+                        <div class="mb-3" *ngIf="showStartDateOnly">
                           <label for="customDateField" class="form-label required">Start Date</label>
-                          <!-- <input type="text" 
-                          class="form-control"  
-                          #calendarStartDate
-                          name="customDateField" 
-                          formControlName="startdate"
-                          placeholder="DD-MMM-YYYY"> -->
                           <input
                             type="text"
                             class="form-control"
@@ -78,9 +72,16 @@
                         <div class="mb-3">
                             <label for="customDateField" class="form-label required">End Date</label>
                             
-                            <input type="text" class="form-control" #calendarEndDate 
+                            <input
+                            type="text"
+                            class="form-control"
+                            mwlFlatpickr
+                            [altInput]="true"
+                            placeholder="DD-MMM-YYYY"
+                            [dateFormat]="'Y-m-d'"  
+                            [convertModelValue]="true"
                             formControlName="enddate"
-                            name="customDateField" placeholder="DD-MMM-YYYY">
+                        >
                             <svg class="date-icon-pos" width="22%" height="22%" viewBox="0 0 24 24" fill="none" 
                             xmlns="http://www.w3.org/2000/svg"
                             
