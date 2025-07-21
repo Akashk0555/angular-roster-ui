@@ -1,0 +1,48 @@
+*{
+    font-family: "Montserrat", sans-serif;;
+}
+
+h4.modal-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+.modal-header{
+    border: none;
+}
+.form-label{
+    font-weight: 500;
+}
+
+.modal-content{
+    height: 450px;
+}
+.mb-3{
+    height: 80px;
+}
+
+.date-icon-pos{
+    width: 20px;
+    float: right;
+    margin-top: -28px;
+    margin-right: 10px;
+}
+.justify-content-end{
+    position: relative;
+    top: 94px;
+}
+.btn-blue{
+    background-color: #0038A8;
+    color: white;
+    height: 40px;
+    margin: 10px;
+
+}
+.btn-blue-textblue{
+    background-color: #EAF2F9;
+    color:#0038A8 ;
+    margin: 10px;
+}
+
+:host ::ng-deep .ng-dropdown-panel-items.scroll-host{
+    height: 150px;
+}

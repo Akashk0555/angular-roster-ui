@@ -9,11 +9,12 @@ import flatpickr from 'flatpickr';
 })
 export class AssignShiftComponent implements OnInit , AfterViewInit{
   loginForm!: FormGroup;
-  roles = [
-  { label: 'Admin', value: 'admin' },
-  { label: 'User', value: 'user' },
-  { label: 'Manager', value: 'manager' }
-]; // dropdown options
+  selectedEmployee: any;
+  employees = [
+    { id: 1, name: 'Alice', email: 'alice@example.com', department: 'HR' },
+    { id: 2, name: 'Bob', email: 'bob@example.com', department: 'IT' },
+    { id: 3, name: 'Charlie', email: 'charlie@example.com', department: 'Finance' }
+  ]; // dropdown options
   
   @ViewChild('calendarstartdate') calendarStartDate!:ElementRef;
   private flatpickrIns:any;
@@ -36,11 +37,21 @@ export class AssignShiftComponent implements OnInit , AfterViewInit{
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+    // email: ['', [Validators.required, Validators.email]],
       setstarttime: ['', Validators.required],
       role: [null, Validators.required] ,
       actualstarttime: ['', Validators.required],
-      date: ['', Validators.required]
+      date: ['', Validators.required],
+      shortname:[],
+      setendtime:[],
+      actualendtime:[],
+      shifttype:[],
+      description:[],
+      employeeId: [null]
+    });
+
+    this.loginForm.get('employeeId')?.valueChanges.subscribe(employeeId => {
+      this.selectedEmployee=this.employees.find(e=>e.id===employeeId);
     });
   }
 
@@ -65,12 +76,26 @@ export class AssignShiftComponent implements OnInit , AfterViewInit{
     return this.loginForm.get('role');
   }
   get actualstarttime() {
-    return this.loginForm.get('time');
+    return this.loginForm.get('actualstarttime');
   }
   get date() {
     return this.loginForm.get('date');
   }
-
+  get shortname(){
+    return this.loginForm.get('shortname');
+  }
+  get setendtime(){
+    return this.loginForm.get('setendtime');
+  }
+  get actualendtime(){
+    return this.loginForm.get('actualendtime');
+  }
+  get shifttype(){
+    return this.loginForm.get('shifttype');
+  }
+  get description(){
+    return this.loginForm.get('description');
+  }
   
 
 }
