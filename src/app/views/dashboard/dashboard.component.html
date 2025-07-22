@@ -1,6 +1,7 @@
 <div class="mt-3">
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#assignshift">Assign Shift</button>
-<button class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#assignpaycode">Assign Paycode</button>
+  <button class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#assignpaycode">Assign Paycode</button>
+  <button class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#assignpattern">Assign Pattern</button>
 
 </div>
 <div class="modal" id="assignshift" >
@@ -9,43 +10,81 @@
 <div class="modal" id="assignpaycode" >
   <app-assign-paycode></app-assign-paycode>
 </div>
-
-<form [formGroup]="employeeForm">
-    <!-- Dropdown -->
-    <div class="mb-3">
-      <ng-select
-      [items]="employees"
-      bindLabel="name"
-      bindValue="id"
-      formControlName="employeeId"
-      placeholder="Select Employee"
-      >
-    </ng-select>
-    </div>
-    
-    
-    <!-- Auto-populated Fields -->
-    <div *ngIf="selectedEmployee">
-      <div class="mt-3">
-        <label>Email:</label>
-  <input type="text" class="form-control" [value]="selectedEmployee.email" readonly>
-      </div>
-      <div class="mt-2">
-        <label>Department:</label>
-        <input type="text" class="form-control" [value]="selectedEmployee.department" readonly>
-      </div>
-    </div>
-  </form>
+<div class="modal" id="assignpattern" >
+  <app-assign-pattern></app-assign-pattern>
+</div>
 
 <div class="mt-3">
-  <input
-    type="text"
-    mwlFlatpickr
-    [altInput]="true"
-    placeholder="DD-MMM-YYYY"
-    [dateFormat]="'Y-m-d'"  
-    [convertModelValue]="true"
-    [ngModel]="selectedDate"
-  >
-  
+  <form [formGroup]="patternForm" (ngSubmit)="onSubmit()" class="container mt-4">
+  <div class="row mb-3">
+    <div class="col">
+      <label>Pattern ID</label>
+      <input class="form-control" formControlName="PatternId" />
+    </div>
+    <div class="col">
+      <label>Pattern Name</label>
+      <input class="form-control" formControlName="PatternName" />
+    </div>
+    <div class="col">
+      <label>Pattern Short Name</label>
+      <input class="form-control" formControlName="PatternShortName" />
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label>Description</label>
+    <textarea class="form-control" formControlName="Description"></textarea>
+  </div>
+
+  <h5 class="mt-4">Pattern Schedule</h5>
+  <!-- <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th>PayCodes</th>
+        <th>Shift</th>
+      </tr>
+    </thead>
+    <tbody formArrayName="PatternSchedule">
+      <tr *ngFor="let group of patternSchedule.controls; let i = index" [formGroupName]="i">
+        <td>
+          <input class="form-control" formControlName="Day" readonly />
+        </td>
+        <td>
+          <input
+            class="form-control"
+            [value]="getPayCodesValue(i)"
+            (input)="updatePayCodes(i, $any($event.target).value)" />
+        </td>
+        <td>
+          <input class="form-control" formControlName="Shift" />
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+  <h5 class="mt-4">Pattern Schedule</h5>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>PayCodes</th>
+      <th>Shift</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let group of patternSchedule.controls; let i = index">
+      <td>{{ group.get('Day')?.value }}</td>
+      <td>{{ getPayCodesValue(i) }}</td>
+      <td>{{ group.get('Shift')?.value }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+  <button class="btn btn-primary mt-3" type="submit">Submit</button>
+</form>
+
 </div>
+  
+   
+

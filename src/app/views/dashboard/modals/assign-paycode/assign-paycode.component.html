@@ -15,9 +15,9 @@
                     <div class="col-12 col-sm-6 col-md-4">
                         <div class="mb-3">
                             <label class="form-label required">Pay Code Name</label>
-                            <ng-select [items]="paycode"
-                            bindLabel="paycodename"
-                            bindValue="paycodename"
+                            <ng-select [items]="paycodes"
+                            bindLabel="PayCodeName"
+                            bindValue="PayCodeName"
                             name="paycodename"
                             formControlName="paycodename"
                             placeholder="Select Pay Code"
@@ -26,8 +26,8 @@
                             </ng-select>
                         </div>
                         
-                        <div class="mb-3" *ngIf="showStartDateOnly">
-                          <label for="customDateField" class="form-label required">Start Date</label>
+                        <div class="mb-3">
+                          <label for="customDateField" class="form-label">Start Date</label>
                           <input
                             type="text"
                             class="form-control"
@@ -48,7 +48,7 @@
                           
                         </div>
                         
-                        <div class="mb-3">
+                        <div class="mb-3" *ngIf="isAllowance">
                             <label class="form-label">Allowance Type</label>
                             <select class="form-select" aria-label="Default select example" formControlName="allowancetype">
                                 <option selected>Select</option>
@@ -70,7 +70,7 @@
 
                         </div>
                         <div class="mb-3">
-                            <label for="customDateField" class="form-label required">End Date</label>
+                            <label for="enddate" class="form-label">End Date</label>
                             
                             <input
                             type="text"
@@ -91,7 +91,7 @@
                             
                           </div>
                           
-                            <div class="mb-3">
+                            <div class="mb-3" *ngIf="isAllowance ||isOT">
                                 <label class="form-label">Start Time</label>
                                 <input type="time" class="form-control" formControlName="starttime" />
                                
@@ -107,7 +107,7 @@
                             ></textarea>
                             
                           </div>
-                          <div class="mb-3 justify-content-end">
+                          <div class="mb-3 justify-content-end" *ngIf="isAllowance||isOT">
                             <label class="form-label">End Time</label>
                             <input type="time" class="form-control" id="" 
                             formControlName="endtime"

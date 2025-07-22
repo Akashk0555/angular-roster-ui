@@ -10,12 +10,17 @@ import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FlatpickrDirective, provideFlatpickrDefaults } from 'angularx-flatpickr';
+import { AssignPatternComponent } from './views/dashboard/modals/assign-pattern/assign-pattern.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PrevUsedPatternComponent } from './views/dashboard/modals/assign-pattern/prev-used-pattern/prev-used-pattern.component';
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     AssignShiftComponent,
     AssignPaycodeComponent,
+    AssignPatternComponent,
+    PrevUsedPatternComponent,
     
   ],
   imports: [
@@ -25,7 +30,8 @@ import { FlatpickrDirective, provideFlatpickrDefaults } from 'angularx-flatpickr
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
-    FlatpickrDirective
+    FlatpickrDirective,
+    NgbModule
   ],
   providers: [
     provideClientHydration(),

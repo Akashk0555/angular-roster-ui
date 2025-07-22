@@ -9,37 +9,116 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class AssignPaycodeComponent implements OnInit {
   
   paycodeForm!: FormGroup;
-  showStartDateOnly = false;
-  paycode=[
+  isOT = false;
+  isAllowance=false;
+
+
+  paycodes= [
     {
-  "paycodename": "Regular Shift",
-  "shortname": "REG",
-  paycodetype:'OT',
-  "description": "Standard working shift for all employees",
-  "startdate": "2025-07-01",
-  "enddate": "2025-12-31",
-  "allowancetype": '1',
-  "starttime": "09:00",
-  "endtime": "18:00"
-},
-  {
-    id: 2,
-    paycodename: 'Night Shift',
-    paycodetype:'Allowance',
-    shortname: 'NGT',
-    description: 'Night working hours',
-    startdate: '2025-07-15',
-    enddate: '2025-12-31',
-    allowancetype: '2', // "My Access"
-    starttime: '21:00',
-    endtime: '06:00'
-  }
+      "PayCodeId": "1",
+      "PayCodeName": "Regular Paycode",
+      "PayCodeShortName": "REG",
+      "Description": "Test Description",
+      "ColorCode": "#FF5733",
+      "PayCodePriority": "1",
+      "PayCodeCombine": "Yes",
+      "PayCodePatternUse": "Yes",
+      "PayCodeStatus": "Active",
+      "PayCodeType": "Allowance",
+      "Deleted": false,
+      "CreationDate": "2025-07-15T03:57:07.407Z",
+      "ModificationDate": "2025-07-15T03:57:07.407Z",
+      "CreatedBy": "sample-created-user1",
+      "UpdatedBy": "sample-updated-user1"
+    },
+    {
+      "PayCodeId": "2",
+      "PayCodeName": "ON",
+      "PayCodeShortName": "ON",
+      "Description": "Test Description",
+      "ColorCode": "#FF5733",
+      "PayCodePriority": "1",
+      "PayCodeCombine": "Yes",
+      "PayCodePatternUse": "Yes",
+      "PayCodeStatus": "Active",
+      "PayCodeType": "OT",
+      "Deleted": false,
+      "CreationDate": "2025-07-15T03:57:07.407Z",
+      "ModificationDate": "2025-07-15T03:57:07.407Z",
+      "CreatedBy": "sample-created-user1",
+      "UpdatedBy": "sample-updated-user1"
+    },
+    {
+      "PayCodeId": "3",
+      "PayCodeName": "Travel",
+      "PayCodeShortName": "TRA",
+      "Description": "Test Description",
+      "ColorCode": "#FF5733",
+      "PayCodePriority": "1",
+      "PayCodeCombine": "Yes",
+      "PayCodePatternUse": "Yes",
+      "PayCodeStatus": "Active",
+      "PayCodeType": "Allowance",
+      "Deleted": false,
+      "CreationDate": "2025-07-15T03:57:07.407Z",
+      "ModificationDate": "2025-07-15T03:57:07.407Z",
+      "CreatedBy": "sample-created-user1",
+      "UpdatedBy": "sample-updated-user1"
+    },
+    {
+      "PayCodeId": "4",
+      "PayCodeName": "Regular Paycode",
+      "PayCodeShortName": "REG",
+      "Description": "Test Description",
+      "ColorCode": "#FF5733",
+      "PayCodePriority": "1",
+      "PayCodeCombine": "Yes",
+      "PayCodePatternUse": "Yes",
+      "PayCodeStatus": "Active",
+      "PayCodeType": "Allowance",
+      "Deleted": false,
+      "CreationDate": "2025-07-15T03:57:07.407Z",
+      "ModificationDate": "2025-07-15T03:57:07.407Z",
+      "CreatedBy": "sample-created-user1",
+      "UpdatedBy": "sample-updated-user1"
+    },
+    {
+      "PayCodeId": "5",
+      "PayCodeName": "Regular Paycode",
+      "PayCodeShortName": "REG",
+      "Description": "Test Description",
+      "ColorCode": "#FF5733",
+      "PayCodePriority": "1",
+      "PayCodeCombine": "Yes",
+      "PayCodePatternUse": "Yes",
+      "PayCodeStatus": "Active",
+      "PayCodeType": "Allowance",
+      "Deleted": false,
+      "CreationDate": "2025-07-15T03:57:07.407Z",
+      "ModificationDate": "2025-07-15T03:57:07.407Z",
+      "CreatedBy": "sample-created-user1",
+      "UpdatedBy": "sample-updated-user1"
+    },
+    {
+      "PayCodeId": "6",
+      "PayCodeName": "Regular Paycode",
+      "PayCodeShortName": "REG",
+      "Description": "Test Description",
+      "ColorCode": "#FF5733",
+      "PayCodePriority": "1",
+      "PayCodeCombine": "Yes",
+      "PayCodePatternUse": "Yes",
+      "PayCodeStatus": "Active",
+      "PayCodeType": "Allowance",
+      "Deleted": false,
+      "CreationDate": "2025-07-15T03:57:07.407Z",
+      "ModificationDate": "2025-07-15T03:57:07.407Z",
+      "CreatedBy": "sample-created-user1",
+      "UpdatedBy": "sample-updated-user1"
+    }
   ]
-  employees = [
-    { id: 1, name: 'Alice', email: 'alice@example.com', department: 'HR' },
-    { id: 2, name: 'Bob', email: 'bob@example.com', department: 'IT' },
-    { id: 3, name: 'Charlie', email: 'charlie@example.com', department: 'Finance' }
-  ]; // dropdown options
+  
+   // dropdown options
   constructor(private fb: FormBuilder,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
@@ -47,7 +126,6 @@ export class AssignPaycodeComponent implements OnInit {
   ngOnInit(): void {
     this.paycodeForm = this.fb.group({
       paycodename:[],
-      paycodetype:[],
       shortname:[],
       description:[],
       startdate:[],
@@ -58,22 +136,24 @@ export class AssignPaycodeComponent implements OnInit {
     });
 
     this.paycodeForm.get('paycodename')?.valueChanges.subscribe(id => {
-    const selected = this.paycode.find(p => p.paycodename === id);
-    if (selected) {
-      this.paycodeForm.patchValue({
-        shortname: selected.shortname,
-        description: selected.description,
-        startdate: selected.startdate,
-        enddate: selected.enddate,
-        allowancetype: selected.allowancetype,
-        starttime: selected.starttime,
-        endtime: selected.endtime,
-        paycodetype: selected.paycodetype
-      });
+      const selected = this.paycodes.find(p => p.PayCodeName === id);
+      if (selected) {
+        this.paycodeForm.patchValue({
+          shortname: selected.PayCodeShortName,
+          description: selected.Description,
+          //startdate: selected.,
+          //enddate: selected.enddate,
+          //allowancetype: selected.PayCodeType,
+          //starttime: selected.starttime,
+         // endtime: selected.endtime,
+         // paycodetype: selected.paycodetype
+        });
+  
+        this.isOT = selected.PayCodeType === 'OT';
+        this.isAllowance = selected.PayCodeType === 'Allowance';
+      }
+    });
 
-      this.showStartDateOnly = selected.paycodetype === 'OT';
-    }
-  });
 
   }
   onSubmit(): void {
