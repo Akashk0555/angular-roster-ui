@@ -1,0 +1,38 @@
+*{
+    font-family: "Montserrat", sans-serif;;
+}
+
+h4.modal-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+.modal-header{
+    border: none;
+}
+.form-label{
+    font-weight: 500;
+}
+.btn-prev-used {
+    border: 1px solid black;
+    border-radius: 12px;
+    margin-left: 10px;
+    color: #7E8EDF;
+    background-color: white;
+    font-size: 14px;
+}
+.date-icon-pos{
+    width: 20px;
+    float: right;
+    margin-top: -28px;
+    margin-right: 10px;
+}
+input#inlineCheckbox1 {
+    margin-left: 10px;
+}
+.pattern-schedule[_ngcontent-ng-c4015764215] {
+    width: 90%;
+    border: 1px solid black;
+    height: 200px;
+    border-radius: 10px;
+    margin-left: 50px;
+}
