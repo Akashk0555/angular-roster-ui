@@ -4,6 +4,7 @@
         <!-- Modal Header -->
         <div class="modal-header">
             <h4 class="modal-title">Assign Pattern</h4>
+            {{nameFromSecondModal}}
             <button type="button" class="card-link btn-prev-used" (click)="openNestedModal()">Previously Used Pattern</button>
         </div>
 
@@ -15,9 +16,9 @@
                         <div class="mb-3">
                             <label for="patternname" class="form-label required">Shift Name</label>
                             <ng-select
-                                [items]=""
-                                bindLabel=""
-                                bindValue=""
+                                [items]="patterns"
+                                bindLabel="PatternName"
+                                bindValue="PatternId"
                                 placeholder="Select Shift"
                                 formControlName="patternname"
                                 [class.is-invalid]="patternname?.invalid && patternname?.touched">
@@ -26,7 +27,7 @@
                                 {{selectedEmployee.email}}
                             </div> -->
                             <div class="invalid-feedback" *ngIf="patternname?.errors?.['required']">
-                                Role is required.
+                                Required.
                             </div>
                             </div>
                             <div class="mb-3">
@@ -123,9 +124,55 @@
                         
                     </div>
                 </div>
-                <div class="pattern-schedule">
-                    
+                <div class="pattern-schedule" *ngIf="selectedPattern">
+            <table class="table table-bordered text-center">
+                <thead class="table-light">
+                <tr>
+                    <th>Series</th>
+                    <th *ngFor="let d of [1,2,3,4,5,6,7]">Day {{ d }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let group of getGroupedPatternDetails(); let i = index">
+                    <td><strong>{{ i + 1 }}</strong></td> <!-- Series -->
+                    <td *ngFor="let day of group" class="position-relative">
+            <div *ngIf="getShiftDetailsByDay(day); else noShift">
+                <div class="d-flex justify-content-center align-items-center gap-1">
+                <span>{{ getShiftDetailsByDay(day)?.Shift?.ShiftName }}</span>
+                <button 
+                    type="button"
+                    class="btn btn-sm p-0 popup-trigger"
+                    (click)="showPopup(day, $event)">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </button>
                 </div>
+
+                <!-- Floating Popup -->
+                <div
+                *ngIf="isPopupVisible(day)"
+                class="popup-container position-absolute bg-white border shadow p-2 small z-3 rounded"
+                style="top: 100%; left: 50%; transform: translateX(-50%); min-width: 150px;"
+                >
+                <div><strong>Shift:</strong> {{ getShiftDetailsByDay(day)?.Shift?.ShiftName }}</div>
+                <div *ngFor="let pc of getShiftDetailsByDay(day)?.PayCodes">
+                    <strong>PayCode:</strong> {{ pc.PayCodeName }}
+                </div>
+                </div>
+            </div>
+
+            <ng-template #noShift>
+                <span class="text-muted">No Shift</span>
+            </ng-template>
+            </td>
+
+                    <!-- Fill empty cells if not a full 7 -->
+                    <td *ngFor="let _ of [1,2,3,4,5,6,7].slice(group.length)">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+
             </form>
         </div>
 
@@ -137,7 +184,7 @@
                           <path d="M13.5215 1.25L1.52148 13.25M1.52148 1.25L13.5215 13.25" stroke="#0038A8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
                         </a>
-                    <button type="submit" class=" card-link btn btn-blue rounded-5"  >Assign
+                    <button type="submit"  (click)="onSubmit()" class=" card-link btn btn-blue rounded-5"  >Assign
                 
                     </button>
 

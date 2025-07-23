@@ -36,3 +36,7 @@ input#inlineCheckbox1 {
     border-radius: 10px;
     margin-left: 50px;
 }
+.popup-container {
+  z-index: 9999;
+  white-space: nowrap;
+}

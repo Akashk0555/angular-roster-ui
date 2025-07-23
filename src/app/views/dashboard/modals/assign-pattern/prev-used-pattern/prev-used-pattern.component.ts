@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,9 +7,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './prev-used-pattern.component.scss'
 })
 export class PrevUsedPatternComponent {
- constructor(public activeModal: NgbActiveModal) {}
+  @Input() name:string='';
+  constructor(public activeModal: NgbActiveModal) {}
 
   closeModal(): void {
     this.activeModal.close(); // Closes the modal programmatically
+  }
+  submit(){
+    this.activeModal.close(this.name);
   }
 }
