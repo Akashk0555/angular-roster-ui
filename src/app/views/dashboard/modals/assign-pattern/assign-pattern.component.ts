@@ -545,15 +545,30 @@ constructor(private modalService:NgbModal,
 
 
 
+// Open previously used pattern
+openNestedModal() {
+  const modalRef = this.modalService.open(PrevUsedPatternComponent, {
+    size: 'lg',
+    backdrop: 'static'
+  });
 
-openNestedModal(): void {
-  const modalRef=this.modalService.open(PrevUsedPatternComponent, { size: 'lg', scrollable: true });
-  modalRef.componentInstance.name='default';
-  modalRef.result.then((result)=>{
-    if(result){
-      this.nameFromSecondModal=result;
+  // Receive data when the child modal closes
+  modalRef.result.then((result) => {
+    if (result) {
+      console.log('Received from prev-used-pattern:', result);
+      // Now use the result in assign-pattern component
+      this.useReceivedPattern(result);
     }
-  }).catch(()=>{})
+  }).catch((error) => {
+    // Modal dismissed (e.g., user clicked outside or pressed ESC)
+    console.log('Modal dismissed', error);
+  });
+}
+
+useReceivedPattern(data: any) {
+  this.nameFromSecondModal=data
+  // Do something with the data returned from the child modal
+  console.log('Using pattern:', data);
 }
 onSubmit(): void {
   console.log(this.selectedPattern)
@@ -625,6 +640,9 @@ onDocumentClick(event: MouseEvent): void {
     this.closePopup();
   }
 }
+
+
+
 
 
 }

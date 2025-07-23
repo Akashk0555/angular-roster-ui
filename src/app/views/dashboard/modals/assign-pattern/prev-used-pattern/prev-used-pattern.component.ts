@@ -7,13 +7,16 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './prev-used-pattern.component.scss'
 })
 export class PrevUsedPatternComponent {
-  @Input() name:string='';
+  
   constructor(public activeModal: NgbActiveModal) {}
 
-  closeModal(): void {
-    this.activeModal.close(); // Closes the modal programmatically
-  }
-  submit(){
-    this.activeModal.close(this.name);
-  }
+  selectPattern(pattern: any) {
+  // Pass data back to parent modal
+  this.activeModal.close(pattern);
+}
+
+// Optionally handle cancel
+cancel() {
+  this.activeModal.dismiss();
+}
 }
