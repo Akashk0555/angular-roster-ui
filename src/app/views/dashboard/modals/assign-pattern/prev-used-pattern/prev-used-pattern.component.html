@@ -5,41 +5,43 @@
 </div>
 
 <div class="modal-body">
-    <!-- <div class="inner-container mt-3">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Series</th>
-              <th scope="col">1</th>
-              <th scope="col">2</th>
-              <th scope="col">3</th>
-              <th scope="col">4</th>
-              <th scope="col">5</th>
-              <th scope="col">6</th>
-              <th scope="col">7</th>
-      
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              
-              
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              
-              
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-            </tr>
-          </tbody>
-        </table>
-        
-      </div> -->
+   <table class="table table-bordered text-center">
+  <thead>
+    <tr>
+      <th>Series</th>
+      <th *ngFor="let day of [1,2,3,4,5,6,7]">Day {{ day }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of getShiftRows(); let i = index">
+      <td>Series {{ i + 1 }}</td>
+      <td *ngFor="let col of [0,1,2,3,4,5,6]">
+        <ng-container *ngIf="row[col] as detail">
+          <div [style.background]="detail.Shift?.ColorCode"
+               class="p-1 rounded text-white position-relative">
+            {{ detail.Shift?.ShiftName }}
+            <button 
+                    type="button"
+                    class="btn btn-sm p-0 popup-trigger"
+                    (click)="toggleDropdown(i, col)">
+                    <i class="bi bi-three-dots-vertical"></i>
+            </button>
 
-      <button class="btn btn-primary" (click)="selectPattern('akash')">Use This Pattern</button>
+            <div class="dropdown-menu show mt-2"
+                 *ngIf="isDropdownOpen(i, col)"
+                 style="position: absolute; z-index: 100;">
+              <div class="dropdown-item" *ngFor="let pc of detail.PayCodes">
+                {{ pc.PayCodeName }} ({{ pc.PayCodeShortname }})
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+      <button class="btn btn-primary" (click)="useThisPattern(prevUsedPattern)">Use This Pattern</button>
 <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
 
 <div class="modal-footer">

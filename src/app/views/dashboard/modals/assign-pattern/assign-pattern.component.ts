@@ -519,22 +519,23 @@ constructor(private modalService:NgbModal,
 
     this.assignPatternForm.get('patternname')?.valueChanges.subscribe(id => {
       this.selectedPattern=this.patterns.find(p=>p.PatternId===id);
+      console.log(this.selectedPattern)
      
-      const selected = this.patterns.find(p => p.PatternId === id);
-      if (selected) {
+      //const selected = this.patterns.find(p => p.PatternId === id);
+      if (this.selectedPattern) {
         this.assignPatternForm.patchValue({
-          selectedPatternId:selected.PatternId,
+          selectedPatternId:this.selectedPattern.PatternId,
          // shortname: selected.PayCodeShortName,
-          description: selected.Description,
-          recurring:selected.Recurring,
-          noofdaysorweek:selected.Days,
+          description: this.selectedPattern.Description,
+          recurring:this.selectedPattern.Recurring,
+          noofdaysorweek:this.selectedPattern.Days,
           //startdate: selected.,
           //enddate: selected.enddate,
           //allowancetype: selected.PayCodeType,
           //starttime: selected.starttime,
          // endtime: selected.endtime,
          // paycodetype: selected.paycodetype
-         patternschedule:selected.ShiftPatternDetails
+         patternschedule:this.selectedPattern.ShiftPatternDetails
         });
   
         
@@ -542,9 +543,6 @@ constructor(private modalService:NgbModal,
     });
 
   }
-
-
-
 // Open previously used pattern
 openNestedModal() {
   const modalRef = this.modalService.open(PrevUsedPatternComponent, {
@@ -552,24 +550,34 @@ openNestedModal() {
     backdrop: 'static'
   });
 
-  // Receive data when the child modal closes
-  modalRef.result.then((result) => {
-    if (result) {
-      console.log('Received from prev-used-pattern:', result);
-      // Now use the result in assign-pattern component
-      this.useReceivedPattern(result);
-    }
-  }).catch((error) => {
-    // Modal dismissed (e.g., user clicked outside or pressed ESC)
-    console.log('Modal dismissed', error);
-  });
-}
+  
+    modalRef.componentInstance.patternSelected.subscribe((pattern: any) => {
+      this.selectedPattern = pattern;
+      if (this.selectedPattern) {
+        this.assignPatternForm.patchValue({
+          patternname:this.selectedPattern.PatternId,
+         // shortname: selected.PayCodeShortName,
+          description: this.selectedPattern.Description,
+          recurring:this.selectedPattern.Recurring,
+          noofdaysorweek:this.selectedPattern.Days,
+          //startdate: selected.,
+          //enddate: selected.enddate,
+          //allowancetype: selected.PayCodeType,
+          //starttime: selected.starttime,
+         // endtime: selected.endtime,
+         // paycodetype: selected.paycodetype
+         patternschedule:this.selectedPattern.ShiftPatternDetails
+        });
+  
+        
+      }
+      
+      modalRef.close();
+    });
+  }
 
-useReceivedPattern(data: any) {
-  this.nameFromSecondModal=data
-  // Do something with the data returned from the child modal
-  console.log('Using pattern:', data);
-}
+
+
 onSubmit(): void {
   console.log(this.selectedPattern)
   if (this.assignPatternForm.valid) {
@@ -640,10 +648,5 @@ onDocumentClick(event: MouseEvent): void {
     this.closePopup();
   }
 }
-
-
-
-
-
 }
 
