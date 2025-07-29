@@ -1,3 +1,25 @@
+*{
+    font-family: "Montserrat", sans-serif;;
+}
+
+h4.modal-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+.header{
+  display: flex;
+}
+span{
+  font-weight: 600;
+  
+}
+.row{
+  width: 900px;
+}
+.modal-content{
+  width: 900px;
+}
+
 .dropdown-menu {
   display: block;
   position: absolute;

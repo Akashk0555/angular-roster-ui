@@ -124,7 +124,7 @@
                         
                     </div>
                 </div>
-                <div class="pattern-schedule" *ngIf="selectedPattern">
+                <div class="pattern-schedule" *ngIf="selectedPattern||patternFormPrevUsed">
                 <table class="table table-bordered text-center">
                 <thead class="table-light">
                 <tr>
@@ -135,7 +135,7 @@
                 <tbody>
                 <tr *ngFor="let group of getGroupedPatternDetails(); let i = index">
                     <td><strong>{{ i + 1 }}</strong></td> <!-- Series -->
-                    <td *ngFor="let day of group" class="position-relative">
+                    <td *ngFor="let day of group" class="position-relative" [style.background]="getShiftDetailsByDay(day)?.Shift?.ColorCode">
                         <div *ngIf="getShiftDetailsByDay(day); else noShift">
                         <div class="d-flex justify-content-center align-items-center gap-1">
                         <span>{{ getShiftDetailsByDay(day)?.Shift?.ShiftName }}</span>

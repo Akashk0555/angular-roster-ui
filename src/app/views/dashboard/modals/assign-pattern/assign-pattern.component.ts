@@ -9,13 +9,9 @@ import { PrevUsedPatternComponent } from './prev-used-pattern/prev-used-pattern.
   styleUrl: './assign-pattern.component.scss'
 })
 export class AssignPatternComponent implements OnInit {
-
-  nameFromSecondModal: string='';
-
-
   assignPatternForm!:FormGroup;
-  selectedPattern:any=null;
-
+  selectedPattern:any=null
+  patternFormPrevUsed:any=null
   patterns= [
     {
       "PatternId": 4,
@@ -44,7 +40,7 @@ export class AssignPatternComponent implements OnInit {
             "ShiftName": "General Shift",
             "ShiftShortName": "GEN",
             "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
+            "ColorCode": "#3920b5ff",
             "StartTime": "09:00:00",
             "EndTime": "18:00:00",
             "ShiftStatus": "Active"
@@ -500,7 +496,6 @@ export class AssignPatternComponent implements OnInit {
     }
   ]
   
-
 constructor(private modalService:NgbModal,
             private fb:FormBuilder){}
   ngOnInit(): void {
@@ -550,23 +545,27 @@ openNestedModal() {
     backdrop: 'static'
   });
 
-  
+   
     modalRef.componentInstance.patternSelected.subscribe((pattern: any) => {
-      this.selectedPattern = pattern;
-      if (this.selectedPattern) {
+      this.patternFormPrevUsed = pattern;
+      
+      console.log(this.patternFormPrevUsed.ShiftPatternDetails)
+
+      if (this.patternFormPrevUsed) {
         this.assignPatternForm.patchValue({
-          patternname:this.selectedPattern.PatternId,
+          selectedPatternId:this.patternFormPrevUsed.PatternId,
          // shortname: selected.PayCodeShortName,
-          description: this.selectedPattern.Description,
-          recurring:this.selectedPattern.Recurring,
-          noofdaysorweek:this.selectedPattern.Days,
+          patternname:this.patternFormPrevUsed.PatternName,
+          description: this.patternFormPrevUsed.Description,
+          recurring:this.patternFormPrevUsed.Recurring,
+          noofdaysorweek:this.patternFormPrevUsed.Days,
           //startdate: selected.,
           //enddate: selected.enddate,
           //allowancetype: selected.PayCodeType,
           //starttime: selected.starttime,
          // endtime: selected.endtime,
          // paycodetype: selected.paycodetype
-         patternschedule:this.selectedPattern.ShiftPatternDetails
+         patternschedule:this.patternFormPrevUsed.ShiftPatternDetails
         });
   
         
@@ -613,7 +612,7 @@ get patternschedule(){
 
 
   getGroupedPatternDetails(): any[][] {
-  const allDays = new Array(this.selectedPattern?.Days || 0).fill(0).map((_, i) => i + 1);
+  const allDays = new Array((this.selectedPattern||this.patternFormPrevUsed)?.Days || 0).fill(0).map((_, i) => i + 1);
   const grouped: number[][] = [];
 
   for (let i = 0; i < allDays.length; i += 7) {
@@ -639,7 +638,7 @@ isPopupVisible(day: number): boolean {
   return this.popupVisibleDay === day;
 }
 getShiftDetailsByDay(day: number) {
-  return this.selectedPattern?.ShiftPatternDetails?.find((s: any) => s.Day === day);
+  return (this.selectedPattern||this.patternFormPrevUsed)?.ShiftPatternDetails?.find((s: any) => s.Day === day);
 }
 @HostListener('document:click', ['$event'])
 onDocumentClick(event: MouseEvent): void {

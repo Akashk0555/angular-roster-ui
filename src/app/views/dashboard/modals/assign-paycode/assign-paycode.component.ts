@@ -118,7 +118,7 @@ export class AssignPaycodeComponent implements OnInit {
     }
   ]
   
-   // dropdown options
+
   constructor(private fb: FormBuilder,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}

@@ -61,7 +61,7 @@ export class PrevUsedPatternComponent {
             "ShiftName": "General Shift",
             "ShiftShortName": "GEN",
             "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
+            "ColorCode": "#41d483ff",
             "StartTime": "09:00:00",
             "EndTime": "18:00:00",
             "ShiftStatus": "Active"
@@ -362,9 +362,11 @@ export class PrevUsedPatternComponent {
   dropdownOpenKey: string | null = null;
 
 toggleDropdown(row: number, col: number): void {
+  alert("Clicked")
   const key = `${row}_${col}`;
   this.dropdownOpenKey = (this.dropdownOpenKey === key) ? null : key;
 }
+
 
 isDropdownOpen(row: number, col: number): boolean {
   return this.dropdownOpenKey === `${row}_${col}`;
@@ -396,4 +398,8 @@ cancel() {
   useThisPattern(pattern: any) {
     this.patternSelected.emit(pattern);
   }
+
+
+
+  
 }
