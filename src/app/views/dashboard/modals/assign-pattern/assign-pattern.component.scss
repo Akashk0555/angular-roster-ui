@@ -40,3 +40,6 @@ input#inlineCheckbox1 {
   z-index: 9999;
   white-space: nowrap;
 }
+.dropdown-menu.show {
+  display: block !important;
+}

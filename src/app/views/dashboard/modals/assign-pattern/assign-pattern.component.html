@@ -14,18 +14,15 @@
                 <div class="row g-4">
                     <div class="col-12 col-sm-6 col-md-4">
                         <div class="mb-3">
-                            <label for="patternname" class="form-label required">Shift Name</label>
+                            <label for="patternname" class="form-label required">Pattern Name</label>
                             <ng-select
                                 [items]="patterns"
                                 bindLabel="PatternName"
                                 bindValue="PatternId"
-                                placeholder="Select Shift"
+                                placeholder="Select Pattern"
                                 formControlName="patternname"
                                 [class.is-invalid]="patternname?.invalid && patternname?.touched">
                             </ng-select>
-                            <!-- <div *ngIf="selectedEmployee">
-                                {{selectedEmployee.email}}
-                            </div> -->
                             <div class="invalid-feedback" *ngIf="patternname?.errors?.['required']">
                                 Required.
                             </div>
@@ -144,11 +141,11 @@
                             class="btn btn-sm p-0 popup-trigger"
                             (click)="showPopup(day, $event)">
                             <i class="bi bi-three-dots-vertical"></i>
-                        </button>
+                            </button>
                         </div>
 
                         <!-- Floating Popup -->
-                        <div
+                        <!-- <div
                         *ngIf="isPopupVisible(day)"
                         class="popup-container position-absolute bg-white border shadow p-2 small z-3 rounded"
                         style="top: 100%; left: 50%; transform: translateX(-50%); min-width: 150px;"
@@ -157,7 +154,21 @@
                         <div *ngFor="let pc of getShiftDetailsByDay(day)?.PayCodes">
                             <strong>PayCode:</strong> {{ pc.PayCodeName }}
                         </div>
+                        </div> -->
+
+                        <div 
+                            *ngIf="activeDay === day"
+                            class="dropdown-menu show mt-2"
+                            style="position: absolute; z-index: 1000;"
+                            >
+                        <div><strong>Shift:</strong> {{ getShiftDetailsByDay(day)?.Shift?.ShiftName }}</div>
+                        <div *ngFor="let pc of getShiftDetailsByDay(day)?.PayCodes">
+                            <strong>PayCode:</strong> {{ pc.PayCodeName }}
                         </div>
+</div>
+
+
+
                         </div>
 
                         <ng-template #noShift>

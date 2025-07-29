@@ -9,7 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class PrevUsedPatternComponent {
 
   prevUsedPattern= {
-      "PatternId": 4,
+      "PatternId": 13,
       "PatternName": "Pattern One",
       "PatternStatus": "Pending",
       "Description": "This is a test pattern",

@@ -548,10 +548,8 @@ openNestedModal() {
    
     modalRef.componentInstance.patternSelected.subscribe((pattern: any) => {
       this.patternFormPrevUsed = pattern;
-      
-      console.log(this.patternFormPrevUsed.ShiftPatternDetails)
-
       if (this.patternFormPrevUsed) {
+        this.selectedPattern = pattern;
         this.assignPatternForm.patchValue({
           selectedPatternId:this.patternFormPrevUsed.PatternId,
          // shortname: selected.PayCodeShortName,
@@ -566,16 +564,12 @@ openNestedModal() {
          // endtime: selected.endtime,
          // paycodetype: selected.paycodetype
          patternschedule:this.patternFormPrevUsed.ShiftPatternDetails
-        });
-  
-        
+        }); 
       }
       
       modalRef.close();
     });
   }
-
-
 
 onSubmit(): void {
   console.log(this.selectedPattern)
@@ -625,26 +619,26 @@ get patternschedule(){
 
 popupVisibleDay: number | null = null;
 
-showPopup(day: number, event: MouseEvent) {
-  event.stopPropagation(); // important to prevent document click from immediately closing the popup
-  this.popupVisibleDay = this.popupVisibleDay === day ? null : day;
+activeDay: any = null;
+
+showPopup(day: any, event: MouseEvent) {
+  event.stopPropagation(); // Prevent it from closing immediately
+  this.activeDay = this.activeDay === day ? null : day; // Toggle
 }
 
 closePopup() {
   this.popupVisibleDay = null;
 }
 
-isPopupVisible(day: number): boolean {
-  return this.popupVisibleDay === day;
-}
+
 getShiftDetailsByDay(day: number) {
   return (this.selectedPattern||this.patternFormPrevUsed)?.ShiftPatternDetails?.find((s: any) => s.Day === day);
 }
 @HostListener('document:click', ['$event'])
-onDocumentClick(event: MouseEvent): void {
+handleOutsideClick(event: MouseEvent) {
   const target = event.target as HTMLElement;
-  if (!target.closest('.popup-container') && !target.closest('.popup-trigger')) {
-    this.closePopup();
+  if (!target.closest('.popup-trigger') && !target.closest('.dropdown-menu')) {
+    this.activeDay = null; // Close the popup
   }
 }
 }
