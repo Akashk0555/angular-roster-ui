@@ -21,9 +21,6 @@ export class DashboardComponent implements OnInit {
     
    
   }
-//  searchText = '';
-//   filteredPatterns: any[] = [];
-//   selectedPattern: any = null;
 
   patterns= [
     {
@@ -509,24 +506,7 @@ export class DashboardComponent implements OnInit {
     }
   ]
 
-//   filterPatterns() {
-//     const search = this.searchText.toLowerCase();
-//     this.filteredPatterns = this.patterns.filter(p =>
-//       p.PatternName.toLowerCase().includes(search)
-//     );
-//   }
-
-//   selectPattern(pattern: any) {
-//     this.selectedPattern = pattern;
-//     this.searchText = pattern.PatternName;
-//     this.filteredPatterns = [];
-//   }
-  
-
-
-
-
-searchText = '';
+  searchText = '';
   showDropdown = false;
   filteredPatterns: any[] = [...this.patterns];
   selectedPattern: any = null;
@@ -552,6 +532,7 @@ searchText = '';
 
   selectPattern(pattern: any) {
     this.selectedPattern = pattern;
+    console.log(this.selectedPattern)
     this.searchText = pattern.PatternName;
     this.showDropdown = false;
   }

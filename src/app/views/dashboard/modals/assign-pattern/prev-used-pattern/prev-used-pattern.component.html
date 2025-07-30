@@ -1,19 +1,26 @@
 <div class="modal-content prev">
   <div class="modal-header">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12" style="display: flex;">
         <div class="col-4">
            <p >Pattern Name -  <span>{{prevUsedPattern.PatternName}}</span> </p>
+        </div>
+         <div class="col-4">
+           <p >Recurring -  <span>{{prevUsedPattern.Recurring}}</span> </p>
+        </div>
+        <div class="col-4">
+           <p >New Version Available  
+            <span>
+              <button class="btn btn-preview" 
+              >
+             Preview  <i class="bi bi-eye"></i> </button>
+              
+           </span> </p>
         </div>
         
       </div>
     </div>
-    <div class="header">
-     
-      
-      
-    </div>
-    <button class="btn-close" type="button" aria-label="Close" (click)="cancel()"></button>
+    
 </div>
 
 <div class="modal-body">

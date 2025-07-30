@@ -4,6 +4,10 @@
 .form-label{
     font-weight: 500;
 }
+h4.modal-title {
+    font-size: 16px;
+    font-weight: 600;
+}
 .date-icon-pos{
     width: 20px;
     float: right;
@@ -13,4 +17,22 @@
 .h4.modal-title{
     font-size: 16px;
     font-weight: 600;
+}
+.modal-footer{
+    border: none;
+}
+.btn-blue{
+    background-color: #0038A8;
+    color: white;
+    height: 40px;
+    margin: 10px;
+
+}
+.btn-blue-textblue{
+    background-color: #EAF2F9;
+    color:#0038A8 ;
+    margin: 10px;
+}
+input#inlineCheckbox1 {
+    margin-left: 10px;
 }

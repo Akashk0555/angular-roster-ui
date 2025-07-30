@@ -495,12 +495,12 @@ export class AssignPatternComponent implements OnInit {
       ]
     }
   ]
-  
-constructor(private modalService:NgbModal,
-            private fb:FormBuilder){}
-  ngOnInit(): void {
+
+
+   ngOnInit(): void {
     this.assignPatternForm=this.fb.group({
         selectedPatternId:[null],
+        searchtext:[],
         patternname:[null,Validators.required],
         recurring:[],
         noofdaysorweek:[],
@@ -512,32 +512,69 @@ constructor(private modalService:NgbModal,
         patternschedule:[]
     });
 
-    this.assignPatternForm.get('patternname')?.valueChanges.subscribe(id => {
-      this.selectedPattern=this.patterns.find(p=>p.PatternId===id);
-      console.log(this.selectedPattern)
+    // this.assignPatternForm.get('patternname')?.valueChanges.subscribe(id => {
+    //   this.selectedPattern=this.patterns.find(p=>p.PatternId===id);
+    //   console.log(this.selectedPattern)
      
-      //const selected = this.patterns.find(p => p.PatternId === id);
-      if (this.selectedPattern) {
-        this.assignPatternForm.patchValue({
-          selectedPatternId:this.selectedPattern.PatternId,
-         // shortname: selected.PayCodeShortName,
-          description: this.selectedPattern.Description,
-          recurring:this.selectedPattern.Recurring,
-          noofdaysorweek:this.selectedPattern.Days,
-          //startdate: selected.,
-          //enddate: selected.enddate,
-          //allowancetype: selected.PayCodeType,
-          //starttime: selected.starttime,
-         // endtime: selected.endtime,
-         // paycodetype: selected.paycodetype
-         patternschedule:this.selectedPattern.ShiftPatternDetails
-        });
+    //   //const selected = this.patterns.find(p => p.PatternId === id);
+    //   if (this.selectedPattern) {
+    //     this.assignPatternForm.patchValue({
+    //       selectedPatternId:this.selectedPattern.PatternId,
+    //      // shortname: selected.PayCodeShortName,
+    //       description: this.selectedPattern.Description,
+    //       recurring:this.selectedPattern.Recurring,
+    //       noofdaysorweek:this.selectedPattern.Days,
+    //       //startdate: selected.,
+    //       //enddate: selected.enddate,
+    //       //allowancetype: selected.PayCodeType,
+    //       //starttime: selected.starttime,
+    //      // endtime: selected.endtime,
+    //      // paycodetype: selected.paycodetype
+    //      patternschedule:this.selectedPattern.ShiftPatternDetails
+    //     });
   
         
-      }
-    });
+    //   }
+    // });
 
   }
+  searchText = '';
+  showDropdown = false;
+  filteredPatterns: any[] = [...this.patterns];
+  filterPatterns() {
+    const search = this.searchText.toLowerCase();
+    this.filteredPatterns = this.patterns.filter(p =>
+      p.PatternName.toLowerCase().includes(search)
+    );
+    this.showDropdown = true;
+  }
+
+  onInputFocus() {
+    this.filteredPatterns = [...this.patterns];
+    this.showDropdown = true;
+  }
+
+  onInputBlur() {
+    setTimeout(() => {
+      this.showDropdown = false;
+    }, 200); // delay to allow click
+  }
+
+  selectPattern(pattern: any) {
+    this.selectedPattern = pattern;
+
+    if(this.selectedPattern){
+      this.assignPatternForm.patchValue({
+        patternname:this.selectedPattern.PatternName,
+        patternschedule:this.selectedPattern.ShiftPatternDetails,
+        recurring:this.selectedPattern.Recurring
+      })
+    }
+    this.showDropdown = false;
+  }
+constructor(private modalService:NgbModal,
+            private fb:FormBuilder){}
+ 
 // Open previously used pattern
 openNestedModal() {
   const modalRef = this.modalService.open(PrevUsedPatternComponent, {
