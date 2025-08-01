@@ -173,9 +173,16 @@
                 </div>
                 <div class="mb-1">
                     <label class="form-label" for="inlineCheckbox1">Open Shift</label>
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" formControlName="openshift">
+                    <input class="form-check-input" 
+                           type="checkbox" 
+                           id="inlineCheckbox1" 
+                           value="option1" 
+                           formControlName="openshift"
+                           (change)="showAlert($event)"
+>
                 </div>
-                <div class="mb-3">
+                <ng-container *ngIf="isOpenShift">
+                    <div class="mb-3" >
                     <label class="form-label required">Publish to</label>
                     <select class="form-select" aria-label="Default select example" formControlName="publishto">
                         <option selected>Select</option>
@@ -185,6 +192,8 @@
                       </select>
 
                 </div>
+                </ng-container>
+                
                 
             </div>
          </div>

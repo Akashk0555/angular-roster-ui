@@ -13,6 +13,8 @@ import { FlatpickrDirective, provideFlatpickrDefaults } from 'angularx-flatpickr
 import { AssignPatternComponent } from './views/dashboard/modals/assign-pattern/assign-pattern.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PrevUsedPatternComponent } from './views/dashboard/modals/assign-pattern/prev-used-pattern/prev-used-pattern.component';
+import { UpdatedVersPattComponent } from './views/dashboard/modals/assign-pattern/updated-vers-patt/updated-vers-patt.component';
+import { AssignTempEmpComponent } from './views/dashboard/modals/assign-temp-emp/assign-temp-emp.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +23,8 @@ import { PrevUsedPatternComponent } from './views/dashboard/modals/assign-patter
     AssignPaycodeComponent,
     AssignPatternComponent,
     PrevUsedPatternComponent,
+    UpdatedVersPattComponent,
+    AssignTempEmpComponent,
     
   ],
   imports: [

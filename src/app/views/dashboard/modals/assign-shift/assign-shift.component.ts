@@ -11,7 +11,7 @@ export class AssignShiftComponent implements OnInit , AfterViewInit{
   loginForm!: FormGroup;
   assignShiftForm!: FormGroup;
   selectedEmployee: any;
-
+  isOpenShift=false
   shiftnames=[
     {
       "ShiftId": 4,
@@ -199,10 +199,8 @@ export class AssignShiftComponent implements OnInit , AfterViewInit{
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
   ngAfterViewInit(): void {
-
+   
   }
-
-  
 
   ngOnInit(): void {
     this.assignShiftForm=this.fb.group({
@@ -234,12 +232,17 @@ export class AssignShiftComponent implements OnInit , AfterViewInit{
             shifttype:selected.TypeOfShift
             //paycodetype: selected.paycodetype
           });
-    
-          
         }
       });
-
   }
+
+  showAlert(event: Event): void {
+  this.isOpenShift = (event.target as HTMLInputElement).checked;
+  console.log(this.isOpenShift)
+  
+}
+
+
 
   onSubmit(): void {
     if (this.assignShiftForm.valid) {

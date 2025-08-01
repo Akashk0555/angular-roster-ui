@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UpdatedVersPattComponent } from '../updated-vers-patt/updated-vers-patt.component';
 
 @Component({
   selector: 'app-prev-used-pattern',
@@ -378,7 +379,8 @@ handleClickOutside(event: MouseEvent) {
   }
 }
   constructor(public activeModal: NgbActiveModal,
-    private eRef:ElementRef
+    private eRef:ElementRef,
+    private modalService:NgbModal
 
   ) {}
 
@@ -399,7 +401,14 @@ cancel() {
     this.patternSelected.emit(pattern);
   }
 
+openUpdatedVersion(){
+  const modalRef = this.modalService.open(UpdatedVersPattComponent, {
+    size: 'lg',
+    backdrop: 'static',
+    centered: true
 
+  });
+}
 
   
 }
