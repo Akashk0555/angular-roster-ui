@@ -1,0 +1,151 @@
+*{
+    font-family: "Montserrat", sans-serif;;
+}
+.modal-content{
+    width: 954px;
+}
+h4.modal-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+.modal-header{
+    border: none;
+}
+.form-label{
+    font-weight: 500;
+}
+.col-custom{
+    width: 205px;
+    padding-right: 0;
+}
+.btn-blue{
+    background-color: blue;
+    color: white;
+    display: flex;
+    margin-top: 10px;
+    
+}
+.table-wraper{
+    max-height: 250px;
+}
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  cursor: col-resize;
+  user-select: none;
+  z-index: 1;
+}
+
+th{
+    background-color: #DEE4E6;
+}
+
+@media (max-width: 1200px) {
+  .modal-content {
+    width: 90vw;
+  }
+
+  .col-custom {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .modal-body .row.sticky-top {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .d-grid.d-md-flex.justify-content-md-end {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .btn-width {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  h4.modal-title {
+    font-size: 14px;
+  }
+
+  .form-label {
+    font-size: 14px;
+  }
+
+  .form-select,
+  .form-control {
+    font-size: 14px;
+  }
+
+  .btn-blue,
+  .btn-blue-textblue {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  .table-wraper {
+    overflow-x: auto;
+  }
+
+  th, td {
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 100vw;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 10px;
+  }
+
+  .btn-blue,
+  .btn-blue-textblue {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .col-1 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .date-icon-pos {
+    display: none;
+  }
+}
+.table-wraper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
