@@ -1,347 +1,169 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UpdatedVersPattComponent } from '../updated-vers-patt/updated-vers-patt.component';
 
 @Component({
   selector: 'app-prev-used-pattern',
   templateUrl: './prev-used-pattern.component.html',
-  styleUrl: './prev-used-pattern.component.scss'
+  styleUrl: './prev-used-pattern.component.scss',
 })
-export class PrevUsedPatternComponent {
+export class PrevUsedPatternComponent implements OnInit {
+  prevUsedPattern: any=null;
 
-  prevUsedPattern= {
-      "PatternId": 13,
-      "PatternName": "Pattern One",
-      "PatternStatus": "Pending",
-      "Description": "This is a test pattern",
-      "Recurring": "WEEKS",
-      "Days": 12,
-      "TypeOfPattern": "DAILY",
-      "Public": true,
-      "Deleted": false,
-      "Comments": "Auto approved",
-      "IsApproved": "0",
-      "ApprovedBy": "admin_user",
-      "PatternVersion": 2,
-      "CreationDate": "10-07-2025",
-      "ModificationDate": "10-07-2025",
-      "CreatedBy": "sample-created-user1",
-      "UpdatedBy": "sample-updated-user-2",
-      "ShiftPatternDetails": [
+  allVersionPatterns = [
+    {
+      PatternId: 8,
+      PatternName: 'Pattern t',
+      PatternStatus: 'Draft',
+      Description: 'This is a test pattern',
+      Recurring: 'WEEKS',
+      Days: 7,
+      TypeOfPattern: 'DAILY',
+      Public: true,
+      Deleted: false,
+      Comments: 'Auto approved',
+      IsApproved: null,
+      ApprovedBy: null,
+      PatternVersion: 2,
+      PatternDuplicateCount: 18,
+      CreationDate: '2025-08-01T11:06:43.913Z',
+      ModificationDate: '2025-08-01T11:06:43.913Z',
+      CreatedBy: 'sample-created-user1',
+      UpdatedBy: 'sample-updated-user1',
+      ShiftPatternDetails: [
         {
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
+          ShiftPatternId: 8,
+          PatternId: 8,
+          Shift: {
+            TypeOfShift: 'DAILY',
+            ShiftName: 'General Shift',
+            ShiftShortName: 'GEN',
+            Description: 'Shift for general duties',
+            ColorCode: '#FF5733',
+            StartTime: '09:00:00',
+            EndTime: '18:00:00',
+            ShiftStatus: 'Active',
           },
-          "PayCodes": [
+          PayCodes: [
             {
-              "PayCodeName": "Paycode1",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
+              PayCodeName: 'Paycode1',
+              PayCodeShortName: 'PC1',
+              Description: 'Basic pay',
+              ColorCode: '#00FF00',
+              PayCodePriority: 1,
+              PayCodeCombine: 'YES',
+            },
           ],
-          "Day": 1,
-          "PatternVersion": 2
+          Day: 1,
+          PatternVersion: 1,
         },
+      ],
+      IsPatternType: 'LATEST',
+    },
+    {
+      PatternLogVersionId: 8,
+      PatternId: 8,
+      PatternName: 'Pattern t2',
+      PatternStatus: 'Draft',
+      Description: 'This is a test pattern',
+      Recurring: 'WEEKS',
+      Days: 7,
+      TypeOfPattern: 'DAILY',
+      Public: true,
+      Deleted: false,
+      Comments: 'Auto approved',
+      IsApproved: null,
+      ApprovedBy: null,
+      PatternVersion: 1,
+      PatternDuplicateCount: 0,
+      CreationDate: '2025-08-01T11:06:43.913Z',
+      ModificationDate: '2025-08-01T11:06:43.913Z',
+      CreatedBy: 'sample-created-user1',
+      UpdatedBy: 'sample-updated-user1',
+      ShiftPatternLogVersionDetails: [
         {
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#41d483ff",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
+          ShiftPatternLogVersionId: 8,
+          PatternId: 8,
+          PatternLogVersionId: 8,
+          Shift: {
+            TypeOfShift: 'DAILY',
+            ShiftName: 'General Shift',
+            ShiftShortName: 'GEN',
+            Description: 'Shift for general duties',
+            ColorCode: '#FF5733',
+            StartTime: '09:00:00',
+            EndTime: '18:00:00',
+            ShiftStatus: 'Active',
           },
-          "PayCodes": [
+          PayCodes: [
             {
-              "PayCodeName": "Paycode1",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
+              PayCodeName: 'Paycode1',
+              PayCodeShortName: 'PC1',
+              Description: 'Basic pay',
+              ColorCode: '#00FF00',
+              PayCodePriority: 1,
+              PayCodeCombine: 'YES',
+            },
           ],
-          "Day": 2,
-          "PatternVersion": 2
+          Day: 1,
+          PatternVersion: 1,
         },
-        {
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
-          },
-          "PayCodes": [
-            {
-              "PayCodeName": "Paycode1",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
-          ],
-          "Day": 3,
-          "PatternVersion": 2
-        },
-        {
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
-          },
-          "PayCodes": [
-            {
-              "PayCodeName": "Paycode1",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
-          ],
-          "Day": 4,
-          "PatternVersion": 2
-        },
-        {
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
-          },
-          "PayCodes": [
-            {
-              "PayCodeName": "Paycode1",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
-          ],
-          "Day": 5,
-          "PatternVersion": 2
-        },{
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
-          },
-          "PayCodes": [
-            {
-              "PayCodeName": "Paycode1",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
-          ],
-          "Day": 6,
-          "PatternVersion": 2
-        },
-        {
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
-          },
-          "PayCodes": [
-            {
-              "PayCodeName": "Paycode21",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
-          ],
-          "Day": 7,
-          "PatternVersion": 2
-        },
-        {
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
-          },
-          "PayCodes": [
-            {
-              "PayCodeName": "Paycode1",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
-          ],
-          "Day": 8,
-          "PatternVersion": 2
-        },
-        {
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
-          },
-          "PayCodes": [
-            {
-              "PayCodeName": "Paycode1",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
-          ],
-          "Day": 9,
-          "PatternVersion": 2
-        },
-        {
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
-          },
-          "PayCodes": [
-            {
-              "PayCodeName": "Paycode1",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
-          ],
-          "Day": 10,
-          "PatternVersion": 2
-        },
-        {
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
-          },
-          "PayCodes": [
-            {
-              "PayCodeName": "Paycode1",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
-          ],
-          "Day": 11,
-          "PatternVersion": 2
-        },
-        {
-          "ShiftPatternId": 4,
-          "PatternId": 4,
-          "Shift": {
-            "TypeOfShift": "DAILY",
-            "ShiftName": "General Shift",
-            "ShiftShortName": "GEN",
-            "Description": "Shift for general duties",
-            "ColorCode": "#FF5733",
-            "StartTime": "09:00:00",
-            "EndTime": "18:00:00",
-            "ShiftStatus": "Active"
-          },
-          "PayCodes": [
-            {
-              "PayCodeName": "Paycode1",
-              "PayCodeShortname": "PC1",
-              "Description": "Basic pay",
-              "ColorCode": "#00FF00",
-              "PayCodePriority": 1,
-              "PayCodeCombine": 0
-            }
-          ],
-          "Day": 12,
-          "PatternVersion": 2
-        }
-      ]
-    }
+      ],
+      IsPatternType: 'PREVIOUS',
+    },
+  ];
+
   dropdownState: { [key: string]: boolean } = {};
+
+  
+
+  dropdownOpenKey: string | null = null;
+
+  toggleDropdown(row: number, col: number): void {
+    alert('Clicked');
+    const key = `${row}_${col}`;
+    this.dropdownOpenKey = this.dropdownOpenKey === key ? null : key;
+  }
+
+  isDropdownOpen(row: number, col: number): boolean {
+    return this.dropdownOpenKey === `${row}_${col}`;
+  }
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.dropdownOpenKey = null;
+    }
+  }
+  constructor(
+    public activeModal: NgbActiveModal,
+    private eRef: ElementRef,
+    private modalService: NgbModal
+  ) {}
+
+  ngOnInit(): void {
+   // taking newly created Pattern
+    if (
+      this.allVersionPatterns[0].PatternVersion ==
+      this.allVersionPatterns[1].PatternVersion
+    ) {
+     
+      this.prevUsedPattern = this.allVersionPatterns[0];
+       console.log(this.prevUsedPattern);
+    }
+    else{
+      this.prevUsedPattern=this.allVersionPatterns.find(pattern=>pattern.IsPatternType==='PREVIOUS')
+    }
+
+  }
+
 
   getShiftRows(): any[][] {
     const days = this.prevUsedPattern.ShiftPatternDetails;
@@ -360,55 +182,27 @@ export class PrevUsedPatternComponent {
     return rows;
   }
 
-  dropdownOpenKey: string | null = null;
-
-toggleDropdown(row: number, col: number): void {
-  alert("Clicked")
-  const key = `${row}_${col}`;
-  this.dropdownOpenKey = (this.dropdownOpenKey === key) ? null : key;
-}
-
-
-isDropdownOpen(row: number, col: number): boolean {
-  return this.dropdownOpenKey === `${row}_${col}`;
-}
-@HostListener('document:click', ['$event'])
-handleClickOutside(event: MouseEvent) {
-  if (!this.eRef.nativeElement.contains(event.target)) {
-    this.dropdownOpenKey = null;
-  }
-}
-  constructor(public activeModal: NgbActiveModal,
-    private eRef:ElementRef,
-    private modalService:NgbModal
-
-  ) {}
-
   selectPattern(pattern: any) {
-  // Pass data back to parent modal
-  this.activeModal.close(pattern);
-}
+    // Pass data back to parent modal
+    this.activeModal.close(pattern);
+  }
 
-// Optionally handle cancel
-cancel() {
-  this.activeModal.dismiss();
-}
+  // Optionally handle cancel
+  cancel() {
+    this.activeModal.dismiss();
+  }
 
-
-@Output() patternSelected = new EventEmitter<any>();
+  @Output() patternSelected = new EventEmitter<any>();
 
   useThisPattern(pattern: any) {
     this.patternSelected.emit(pattern);
   }
 
-openUpdatedVersion(){
-  const modalRef = this.modalService.open(UpdatedVersPattComponent, {
-    size: 'lg',
-    backdrop: 'static',
-    centered: true
-
-  });
-}
-
-  
+  openUpdatedVersion() {
+    const modalRef = this.modalService.open(UpdatedVersPattComponent, {
+      size: 'lg',
+      backdrop: 'static',
+      centered: true,
+    });
+  }
 }

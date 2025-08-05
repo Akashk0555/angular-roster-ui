@@ -1,71 +1,78 @@
 <div class="modal-content prev">
   <div class="modal-header">
-    <div class="row">
-      <div class="col-12" style="display: flex;">
+    <div class="row" *ngIf="prevUsedPattern">
+      <div class="col-12" style="display: flex">
         <div class="col-4">
-           <p >Pattern Name -  <span>{{prevUsedPattern.PatternName}}</span> </p>
-        </div>
-         <div class="col-4">
-           <p >Recurring -  <span>{{prevUsedPattern.Recurring}}</span> </p>
+          <p>
+            Pattern Name - <span>{{ prevUsedPattern.PatternName }}</span>
+          </p>
         </div>
         <div class="col-4">
-           <p >New Version Available  
+          <p>
+            Recurring - <span>{{ prevUsedPattern.Recurring }}</span>
+          </p>
+        </div>
+        <div class="col-4">
+          <p>
+            New Version Available
             <span>
-              <button class="btn btn-preview" (click)="openUpdatedVersion()"
-              >
-             Preview  <i class="bi bi-eye"></i> </button>
-              
-           </span> </p>
+              <button class="btn btn-preview" (click)="openUpdatedVersion()">
+                Preview <i class="bi bi-eye"></i>
+              </button>
+            </span>
+          </p>
         </div>
-        
       </div>
     </div>
-    
-</div>
+  </div>
 
-<div class="modal-body">
-   <table class="table table-bordered text-center">
-  <thead>
-    <tr>
-      <th>Series</th>
-      <th *ngFor="let day of [1,2,3,4,5,6,7]">Day {{ day }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let row of getShiftRows(); let i = index">
-      <td>Series {{ i + 1 }}</td>
-      <td *ngFor="let col of [0,1,2,3,4,5,6]">
-        <ng-container *ngIf="row[col] as detail">
-          <div [style.background]="detail.Shift?.ColorCode"
-               class="p-1 rounded text-white position-relative">
-            {{ detail.Shift?.ShiftName }}
-            <button 
-                    type="button"
-                    class="btn btn-sm p-0 popup-trigger"
-                    (click)="toggleDropdown(i, col)">
-                    <i class="bi bi-three-dots-vertical"></i>
-            </button>
+  <div class="modal-body">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th>Series</th>
+          <th *ngFor="let day of [1, 2, 3, 4, 5, 6, 7]">Day {{ day }}</th>
+        </tr>
+      </thead>
+       <tbody>
+        <tr *ngFor="let row of getShiftRows(); let i = index">
+          <td>Series {{ i + 1 }}</td>
+          <td *ngFor="let col of [0, 1, 2, 3, 4, 5, 6]">
+            <ng-container *ngIf="row[col] as detail">
+             <div
+                [style.background]="detail.Shift?.ColorCode"
+                class="p-1 rounded text-white position-relative"
+              >
+                {{ detail.Shift?.ShiftName }}
+                <button
+                  type="button"
+                  class="btn btn-sm p-0 popup-trigger"
+                  (click)="toggleDropdown(i, col)"
+                >
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>
 
-            <div class="dropdown-menu show mt-2"
-                 *ngIf="isDropdownOpen(i, col)"
-                 style="position: absolute; z-index: 100;">
-              <div class="dropdown-item" *ngFor="let pc of detail.PayCodes">
-                {{ pc.PayCodeName }} ({{ pc.PayCodeShortname }})
+                <div
+                  class="dropdown-menu show mt-2"
+                  *ngIf="isDropdownOpen(i, col)"
+                  style="position: absolute; z-index: 100"
+                >
+                  <div class="dropdown-item" *ngFor="let pc of detail.PayCodes">
+                    {{ pc.PayCodeName }} ({{ pc.PayCodeShortname }})
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </ng-container>
-      </td>
-    </tr>
-  </tbody>
-</table>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-      <button class="btn btn-primary" (click)="useThisPattern(prevUsedPattern)">Use This Pattern</button>
-<button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    <button class="btn btn-primary" (click)="useThisPattern(prevUsedPattern)">
+      Use This Pattern
+    </button>
+    <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
 
-<div class="modal-footer">
-  
+    <div class="modal-footer"></div>
+  </div>
 </div>
-</div>
-
-
