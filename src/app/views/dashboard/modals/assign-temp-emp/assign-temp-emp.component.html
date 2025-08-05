@@ -104,15 +104,14 @@
         </div>
       </div>
 
-      <div class="row table-wraper" >
-        <div >
-          <table #resizableTable class="table table-bordered table-striped">
+      <div class="row table-wraper">
+        <div>
+          <table
+            #resizableTable
+            class="simple-table table-bordered table-striped"
+          >
             <thead>
               <tr>
-                <th>
-                  Employee ID
-                  <div class="resizer"></div>
-                </th>
                 <th>
                   Name
                   <div class="resizer"></div>
@@ -152,8 +151,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let e of emp">
-                <td>{{ e.EmployeeID }}</td>
+              <tr
+                *ngFor="let e of emp"
+                (click)="selectRow(e)"
+                [ngClass]="{ 'selected-row': e === selectedRow }"
+              >
                 <td>{{ e.EmployeeName }}</td>
                 <td>{{ e.SLO }}</td>
                 <td>{{ e.Program }}</td>

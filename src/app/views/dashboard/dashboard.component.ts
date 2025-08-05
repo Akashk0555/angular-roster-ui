@@ -17,6 +17,12 @@ export class DashboardComponent implements OnInit {
   
   constructor(private fb: FormBuilder) {}
   Pattern:any[]=[]
+
+  
+
+
+
+
   ngOnInit(): void {
     
    

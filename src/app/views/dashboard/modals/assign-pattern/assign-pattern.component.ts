@@ -1,4 +1,10 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PrevUsedPatternComponent } from './prev-used-pattern/prev-used-pattern.component';
@@ -562,7 +568,11 @@ export class AssignPatternComponent implements OnInit {
     }
     this.showDropdown = false;
   }
-  constructor(private modalService: NgbModal, private fb: FormBuilder) {}
+  constructor(
+    private modalService: NgbModal,
+    private fb: FormBuilder,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   // Open previously used pattern
   openNestedModal() {

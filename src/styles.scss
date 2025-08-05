@@ -1,17 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 * {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
-.required::after{
-  content:" *";
+.required::after {
+  content: " *";
   color: red;
 }
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
-.date-icon-pos{
-    width: 20px;
-    float: right;
-    margin-top: -28px;
-    margin-right: 10px;
+@import "bootstrap/scss/bootstrap";
+.date-icon-pos {
+  width: 20px;
+  float: right;
+  margin-top: -28px;
+  margin-right: 10px;
+}
+.trans-back .modal-content {
+  max-width: 350px;
+  max-height: 0;
 }

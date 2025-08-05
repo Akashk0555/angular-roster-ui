@@ -11,10 +11,14 @@ import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FlatpickrDirective, provideFlatpickrDefaults } from 'angularx-flatpickr';
 import { AssignPatternComponent } from './views/dashboard/modals/assign-pattern/assign-pattern.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PrevUsedPatternComponent } from './views/dashboard/modals/assign-pattern/prev-used-pattern/prev-used-pattern.component';
 import { UpdatedVersPattComponent } from './views/dashboard/modals/assign-pattern/updated-vers-patt/updated-vers-patt.component';
 import { AssignTempEmpComponent } from './views/dashboard/modals/assign-temp-emp/assign-temp-emp.component';
+import { AddCommentsComponent } from './views/dashboard/modals/add-comments/add-comments.component';
+import { ViewCommentsComponent } from './views/dashboard/modals/view-comments/view-comments.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +29,8 @@ import { AssignTempEmpComponent } from './views/dashboard/modals/assign-temp-emp
     PrevUsedPatternComponent,
     UpdatedVersPattComponent,
     AssignTempEmpComponent,
+    AddCommentsComponent,
+    ViewCommentsComponent,
     
   ],
   imports: [
@@ -35,7 +41,8 @@ import { AssignTempEmpComponent } from './views/dashboard/modals/assign-temp-emp
     ReactiveFormsModule,
     NgSelectModule,
     FlatpickrDirective,
-    NgbModule
+    NgbModule,
+    MatDialogModule
   ],
   providers: [
     provideClientHydration(),
@@ -44,7 +51,8 @@ import { AssignTempEmpComponent } from './views/dashboard/modals/assign-temp-emp
       altInput: true,
       altFormat: 'd-M-Y',
       allowInput: true
-    }) 
+    }),
+    NgbActiveModal 
   ],
   bootstrap: [AppComponent]
 })

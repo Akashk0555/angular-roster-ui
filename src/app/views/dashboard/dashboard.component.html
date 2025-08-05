@@ -3,7 +3,8 @@
   <button class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#assignpaycode">Assign Paycode</button>
   <button class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#assignpattern">Assign Pattern</button>
   <button class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#assigntempemp">Assign Temp Emp</button>
-
+  <button class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#assigncomment">Add Comment</button>
+  <button class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#viewcomment">View Comment</button>
 </div>
 <div class="modal" id="assignshift" >
     <app-assign-shift></app-assign-shift>
@@ -16,6 +17,12 @@
 </div>
 <div class="modal" id="assigntempemp" >
   <app-assign-temp-emp></app-assign-temp-emp>
+</div>
+<div class="modal" id="assigncomment" >
+  <app-add-comments></app-add-comments>
+</div>
+<div class="modal" id="viewcomment" >
+  <app-view-comments></app-view-comments>
 </div>
 
 <div class="form-group position-relative">

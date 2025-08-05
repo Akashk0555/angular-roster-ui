@@ -8,6 +8,12 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 export class AssignTempEmpComponent implements AfterViewInit {
   @ViewChild('resizableTable', { static: false })
   tableRef!: ElementRef<HTMLTableElement>;
+  selectedRow: any;
+
+  selectRow(row: any): void {
+    this.selectedRow = row;
+    console.log('Selected Row:', row);
+  }
 
   ngAfterViewInit(): void {
     const tableEl = this.tableRef?.nativeElement;
