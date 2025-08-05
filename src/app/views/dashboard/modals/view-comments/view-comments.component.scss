@@ -1,0 +1,66 @@
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+h4.modal-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.modal-footer {
+  border: none;
+}
+.form-label {
+  font-weight: 500;
+}
+.modal-content {
+  width: 450px;
+}
+.modal-header {
+  position: relative;
+ /* Optional: add space for the span */
+}
+.modal-body{
+  max-height: 200px;
+}
+.modal-header p {
+  position: absolute;
+  margin-top: 45px;   /* Adjust as needed */
+  right: 10px;   /* Adjust as needed */
+  font-size: 0.9em; /* Optional styling */
+  color: #666;      /* Optional styling */
+}
+.modal-header span {
+ position: absolute;
+    margin-top: 27px;
+    font-size: 0.9em;
+    margin-left: 267px;
+}
+p.comment-desc {
+    font-size: smaller;
+    padding-bottom: 0;
+    margin-bottom: 5px;
+}
+p.comment-desc-date {
+    margin-bottom: 4px;
+}
+.view-button {
+    background-color: cadetblue;
+    border-radius: 5px;
+    padding: 3px;
+    height: 30px;
+}
+.col-6{
+  display: inline-block;
+}
+.delete-button {
+    background-color: rgb(221, 163, 163);
+    border-radius: 5px;
+    padding: 3px;
+    height: 30px;
+}
+.comment-border{
+  border: 2px solid #D0D0D0;
+  border-radius: 2px;
+  max-height: 100px;
+}
+
