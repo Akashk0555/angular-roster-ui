@@ -1,4 +1,4 @@
-<div class="modal-content prev">
+<!-- <div class="modal-content prev">
   <div class="modal-header">
     <div class="row">
       <div class="col-12" style="display: flex">
@@ -70,4 +70,45 @@
     </table>
     <div class="modal-footer"></div>
   </div>
+</div> -->
+<div class="modal-body">
+
+  <!-- Pattern A -->
+  <h5>Pattern Version A</h5>
+  <div class="pattern-container mb-4" #scrollTop (scroll)="onScroll('top')">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th *ngFor="let day of days">Day {{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td *ngFor="let day of days">
+            {{ getShiftDetail(allVersionPatterns[0], day)?.ShiftName || '-' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pattern B -->
+  <h5>Pattern Version B</h5>
+  <div class="pattern-container" #scrollBottom (scroll)="onScroll('bottom')">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th *ngFor="let day of days">Day {{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td *ngFor="let day of days">
+            {{ getShiftDetail(allVersionPatterns[1], day)?.ShiftName || '-' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>

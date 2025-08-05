@@ -1,48 +1,118 @@
-*{
-    font-family: "Montserrat", sans-serif;;
-}
+ * {
+    font-family: "Montserrat", sans-serif;
+  }
 
-h4.modal-title {
+  h4.modal-title {
     font-size: 16px;
     font-weight: 600;
-}
-.modal-header{
+    margin-bottom: 0;
+  }
+
+  .modal-header {
     border: none;
-}
-.form-label{
+    flex-direction: row;
+    align-items: center;
+   // justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .form-label {
     font-weight: 500;
-}
-.btn-prev-used {
+  }
+
+  .btn-prev-used {
     border: 1px solid black;
     border-radius: 12px;
     margin-left: 10px;
     color: #7E8EDF;
     background-color: white;
     font-size: 14px;
-}
-.date-icon-pos{
+    height: 36px;
+  }
+
+  .date-icon-pos {
     width: 20px;
     float: right;
     margin-top: -28px;
     margin-right: 10px;
-}
-input#inlineCheckbox1 {
+  }
+
+  input#inlineCheckbox1 {
     margin-left: 10px;
-}
-.pattern-schedule[_ngcontent-ng-c4015764215] {
-    width: 90%;
+  }
+
+  .pattern-schedule {
+    width: 100%;
     border: 1px solid black;
-    height: 200px;
+    height: auto;
     border-radius: 10px;
-    margin-left: 50px;
-}
-.popup-container {
-  z-index: 9999;
-  white-space: nowrap;
-}
-.dropdown-menu.show {
-  display: block !important;
-}
-.dropdown-menu{
-    width: 20%;
-}
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+
+  .popup-container {
+    z-index: 9999;
+    white-space: nowrap;
+  }
+
+  .dropdown-menu.show {
+    display: block !important;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .modal-dialog {
+    max-width: 95vw;
+    margin: 1rem auto;
+  }
+
+  .modal-content {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .modal-body {
+    overflow-x: hidden;
+  }
+
+  .row.g-4 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .col-12.col-sm-6.col-md-4 {
+    flex: 1 1 100%;
+  }
+
+  @media (min-width: 576px) {
+    .col-12.col-sm-6.col-md-4 {
+      flex: 1 1 calc(50% - 1rem);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .col-12.col-sm-6.col-md-4 {
+      flex: 1 1 calc(33.333% - 1rem);
+    }
+  }
+
+  .d-grid.d-md-flex.justify-content-md-end.mb-2 {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .btn-width {
+    width: 100%;
+    max-width: 150px;
+  }
+
+  @media (min-width: 768px) {
+    .btn-width {
+      width: auto;
+    }
+  }

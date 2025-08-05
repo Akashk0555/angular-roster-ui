@@ -17,7 +17,6 @@ import { UpdatedVersPattComponent } from '../updated-vers-patt/updated-vers-patt
 })
 export class PrevUsedPatternComponent implements OnInit {
   prevUsedPattern: any=null;
-
   allVersionPatterns = [
     {
       PatternId: 8,
@@ -166,21 +165,28 @@ export class PrevUsedPatternComponent implements OnInit {
 
 
   getShiftRows(): any[][] {
-    const days = this.prevUsedPattern.ShiftPatternDetails;
-    const rows: any[][] = [];
-    const daysPerRow = 7;
+  if (!this.prevUsedPattern) return [];
 
-    for (let i = 0; i < days.length; i += daysPerRow) {
-      const week = Array(7).fill(null);
-      for (let j = 0; j < daysPerRow && i + j < days.length; j++) {
-        const dayIndex = days[i + j].Day - 1; // Adjust for 0-based index
-        week[dayIndex % 7] = days[i + j];
-      }
-      rows.push(week);
+  const shiftDetails =
+    this.prevUsedPattern.ShiftPatternDetails ||
+    this.prevUsedPattern.ShiftPatternLogVersionDetails;
+
+  if (!shiftDetails || shiftDetails.length === 0) return [];
+
+  const rows: any[][] = [];
+  const daysPerRow = 7;
+
+  for (let i = 0; i < shiftDetails.length; i += daysPerRow) {
+    const week = Array(7).fill(null);
+    for (let j = 0; j < daysPerRow && i + j < shiftDetails.length; j++) {
+      const dayIndex = shiftDetails[i + j].Day - 1;
+      week[dayIndex % 7] = shiftDetails[i + j];
     }
-
-    return rows;
+    rows.push(week);
   }
+
+  return rows;
+}
 
   selectPattern(pattern: any) {
     // Pass data back to parent modal

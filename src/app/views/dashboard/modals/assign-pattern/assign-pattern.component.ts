@@ -583,6 +583,7 @@ export class AssignPatternComponent implements OnInit {
 
     modalRef.componentInstance.patternSelected.subscribe((pattern: any) => {
       this.patternFormPrevUsed = pattern;
+      console.log(this.patternFormPrevUsed);
       if (this.patternFormPrevUsed) {
         this.selectedPattern = pattern;
         this.assignPatternForm.patchValue({
@@ -598,7 +599,9 @@ export class AssignPatternComponent implements OnInit {
           //starttime: selected.starttime,
           // endtime: selected.endtime,
           // paycodetype: selected.paycodetype
-          patternschedule: this.patternFormPrevUsed.ShiftPatternDetails,
+          patternschedule:
+            this.patternFormPrevUsed.ShiftPatternDetails ||
+            this.patternFormPrevUsed.ShiftPatternLogVersionDetails,
         });
       }
 
@@ -667,15 +670,14 @@ export class AssignPatternComponent implements OnInit {
   }
 
   getShiftDetailsByDay(day: number) {
-    console.log(
-      (
-        this.selectedPattern || this.patternFormPrevUsed
-      )?.ShiftPatternDetails?.find((s: any) => s.Day === day).PayCodes
-    );
-    return (
-      this.selectedPattern || this.patternFormPrevUsed
-    )?.ShiftPatternDetails?.find((s: any) => s.Day === day);
-  }
+  const shiftDetails =
+    this.selectedPattern?.ShiftPatternDetails ||
+    this.selectedPattern?.ShiftPatternLogVersionDetails ||
+    this.patternFormPrevUsed?.ShiftPatternDetails ||
+    this.patternFormPrevUsed?.ShiftPatternLogVersionDetails;
+
+  return shiftDetails?.find((s: any) => s.Day === day);
+}
   @HostListener('document:click', ['$event'])
   handleOutsideClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
