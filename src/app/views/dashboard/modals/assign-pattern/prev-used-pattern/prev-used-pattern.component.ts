@@ -206,7 +206,7 @@ export class PrevUsedPatternComponent implements OnInit {
 
   openUpdatedVersion() {
     const modalRef = this.modalService.open(UpdatedVersPattComponent, {
-      size: 'lg',
+     windowClass:'update-pattern',
       backdrop: 'static',
       centered: true,
     });
