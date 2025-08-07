@@ -1,7 +1,22 @@
 .btn{
     margin: 10px;
 }
-.container{
-    width: 50%;
+// .container{
+//     width: 50%;
+// }
+
+.container {
+  display: flex;
+  gap: 20px;
 }
 
+.scroll-box {
+  width: 200px;
+  height: 300px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+}
+
+.content {
+  padding: 10px;
+}

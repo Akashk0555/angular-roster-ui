@@ -18,8 +18,9 @@ export class DashboardComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
   Pattern:any[]=[]
 
-  
+  items = Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`);
 
+ 
 
 
 

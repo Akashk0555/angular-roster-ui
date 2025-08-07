@@ -9,6 +9,9 @@ h4.modal-title {
 .header{
   display: flex;
 }
+.modal-header{
+  padding-bottom: 0;
+}
 span{
   font-weight: 600;
   
@@ -18,8 +21,21 @@ span{
 }
 .modal-content{
   width: 900px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  border: 1px solid #D0D0D0;
 }
-
+td {
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  padding: 0;
+}
+table{
+  .table-bordered{
+    border-color: black;
+  }
+}
 .dropdown-menu {
   display: block;
   position: absolute;
@@ -37,5 +53,14 @@ button.btn.btn-preview {
     color: white;
 }
 td{
-  max-width: 10px;
+  max-width: 5px;
+}
+.modal-body{
+  max-height: 150px;
+  .row{
+    width: 850px;
+  }
+}
+.p-1.rounded.text-white.position-relative {
+    max-height: 30px;
 }

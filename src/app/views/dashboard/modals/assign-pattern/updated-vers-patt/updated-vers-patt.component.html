@@ -5,24 +5,24 @@
         <div class="col-12" style="display: flex">
           <div class="col-4">
             <p>
-              Pattern Name - <span>{{ prevUsedPattern.PatternName }}</span>
+              Pattern Name - <span>{{ updatedPatternVersion.PatternName }}</span>
             </p>
           </div>
           <div class="col-3">
             <p>
-              Recurring - <span>{{ prevUsedPattern.Recurring }}</span>
+              Recurring - <span>{{ updatedPatternVersion.Recurring }}</span>
             </p>
           </div>
           <div class="col-2">
             <p>
-              Version - <span>{{ prevUsedPattern.PatternVersion }}</span>
+              Version - <span>{{ updatedPatternVersion.PatternVersion }}</span>
             </p>
           </div>
           <div class="col-3">
             <p>
               Created On -
               <span>{{
-                prevUsedPattern.CreationDate | date : "dd-MMM-yyyy"
+                updatedPatternVersion.CreationDate | date : "dd-MMM-yyyy"
               }}</span>
             </p>
           </div>
@@ -30,7 +30,28 @@
       </div>
     </div>
 
-    <div class="modal-body">
+    <div
+      class="modal-body"
+      #scrollDiv1
+      (scroll)="onScroll(scrollDiv1, scrollDiv2, 'div1')"
+    >
+      <div class="row">
+        <div class="col-3">
+          <p style="color: 4D4B4D">Pattern Schedule</p>
+        </div>
+        <div class="col-9">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flexRadioDefault2"
+            (change)="onRadioChange(updatedPatternVersion)"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Click to Select Pattern
+          </label>
+        </div>
+      </div>
       <table class="table table-bordered text-center">
         <thead>
           <tr>
@@ -39,35 +60,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of getShiftRows(); let i = index">
-            <td>Series {{ i + 1 }}</td>
-            <td *ngFor="let col of [0, 1, 2, 3, 4, 5, 6]">
+          <tr *ngFor="let row of getShiftRows(updatedPatternVersion); let i = index">
+            <td>{{ i + 1 }}</td>
+            <td
+              *ngFor="let col of [0, 1, 2, 3, 4, 5, 6]"
+              [style.background]="row[col]?.Shift?.ColorCode"
+            >
               <ng-container *ngIf="row[col] as detail">
-                <div
-                  [style.background]="detail.Shift?.ColorCode"
-                  class="p-1 rounded text-white position-relative"
-                >
-                  {{ detail.Shift?.ShiftName }}
-                  <button
-                    type="button"
-                    class="btn btn-sm p-0 popup-trigger"
-                    (click)="toggleDropdown(i, col)"
-                  >
-                    <i class="bi bi-three-dots-vertical"></i>
-                  </button>
-
-                  <div
-                    class="dropdown-menu show mt-2"
-                    *ngIf="isDropdownOpen(i, col)"
-                    style="position: absolute; z-index: 100"
-                  >
-                    <div
-                      class="dropdown-item"
-                      *ngFor="let pc of detail.PayCodes"
-                    >
-                      {{ pc.PayCodeName }} ({{ pc.PayCodeShortname }})
-                    </div>
-                  </div>
+                <div class="p-1 rounded text-white position-relative">
+                  {{ detail.Shift?.ShiftShortName }}
                 </div>
               </ng-container>
             </td>
@@ -108,7 +109,28 @@
       </div>
     </div>
 
-    <div class="modal-body">
+    <div
+      class="modal-body"
+      #scrollDiv2
+      (scroll)="onScroll(scrollDiv2, scrollDiv1, 'div2')"
+    >
+      <div class="row">
+        <div class="col-3">
+          <p style="color: 4D4B4D">Pattern Schedule</p>
+        </div>
+        <div class="col-9">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flexRadioDefault1"
+            (change)="onRadioChange(prevUsedPattern)"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Click to Select Pattern
+          </label>
+        </div>
+      </div>
       <table class="table table-bordered text-center">
         <thead>
           <tr>
@@ -117,7 +139,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of getShiftRows(); let i = index">
+          <tr *ngFor="let row of getShiftRows(prevUsedPattern); let i = index">
+            <td>{{ i + 1 }}</td>
+            <td
+              *ngFor="let col of [0, 1, 2, 3, 4, 5, 6]"
+              [style.background]="row[col]?.Shift?.ColorCode"
+            >
+              <ng-container *ngIf="row[col] as detail">
+                <div class="p-1 rounded text-white position-relative">
+                  {{ detail.Shift?.ShiftShortName }}
+                </div>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
+ <!-- <tr *ngFor="let row of getShiftRows(); let i = index">
             <td>Series {{ i + 1 }}</td>
             <td *ngFor="let col of [0, 1, 2, 3, 4, 5, 6]">
               <ng-container *ngIf="row[col] as detail">
@@ -149,10 +190,4 @@
                 </div>
               </ng-container>
             </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="modal-footer"></div>
-    </div>
-  </div>
-</div>
+          </tr> -->

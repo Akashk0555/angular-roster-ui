@@ -16,9 +16,7 @@ h4.modal-title {
 // .modal-content{
 //     height: 450px;
 // }
-.mb-3{
-    height: 80px;
-}
+
 
 .date-icon-pos{
     width: 20px;
@@ -28,7 +26,6 @@ h4.modal-title {
 }
 .justify-content-end{
     position: relative;
-    top: 94px;
 }
 .btn-blue{
     background-color: #0038A8;
@@ -45,4 +42,7 @@ h4.modal-title {
 
 :host ::ng-deep .ng-dropdown-panel-items.scroll-host{
     height: 150px;
+}
+textarea.form-control.shift-desc.ng-untouched.ng-pristine.ng-valid {
+    height: 121px;
 }

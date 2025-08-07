@@ -4,8 +4,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Comment List</h4>
-        <span
-          ><svg
+        <span *ngIf="payload.Comments[0]?.Internal">
+          <!-- Internal icon -->
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
@@ -36,18 +37,25 @@
             </text>
           </svg>
         </span>
-        <p>Internal Comment</p>
+        <p *ngIf="payload.Comments[0]?.Internal">Internal Comment</p>
       </div>
+
       <div class="modal-body">
-        <div class="row comment-border">
+        <div
+          *ngFor="let comment of payload.Comments"
+          class="row comment-border"
+        >
           <div class="col-9">
-            <p class="form-label">Comment type</p>
-            <p class="comment-desc">Comment type</p>
-            <p class="comment-desc-date">Comment type</p>
+            <p class="form-label">{{ comment.CommentType }}</p>
+            <p class="comment-desc-date">{{ comment.Comment }}</p>
+            <p class="comment-desc">
+              {{ payload.createdDate | date : "dd-MMM-yyyy" }}
+            </p>
           </div>
           <div class="col-3" style="align-content: center">
+            <!-- View Button -->
             <div class="col-6">
-              <a type="button" (click)="openModal()">
+              <a type="button" (click)="openModal(payload)">
                 <svg
                   class="view-button"
                   width="100%"
@@ -73,6 +81,7 @@
                 </svg>
               </a>
             </div>
+            <!-- Delete Button -->
             <div class="col-6">
               <a type="button">
                 <svg
@@ -96,6 +105,7 @@
           </div>
         </div>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">
           Cancel

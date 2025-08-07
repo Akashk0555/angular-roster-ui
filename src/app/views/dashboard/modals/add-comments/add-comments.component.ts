@@ -1,35 +1,55 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ModalService } from '../../../../service/modal.service';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-declare var bootstrap: any;
 
 @Component({
   selector: 'app-add-comments',
   templateUrl: './add-comments.component.html',
-  styleUrl: './add-comments.component.scss',
+  styleUrls: ['./add-comments.component.scss'],
 })
-export class AddCommentsComponent implements OnInit{
-  descriptionControl = new FormControl('');
+export class AddCommentsComponent implements OnInit {
+  rosterForm!: FormGroup;
   maxChars = 1000;
   remainingChars = this.maxChars;
-  
 
-  constructor(private modalService: ModalService,
-    private activeModal:NgbActiveModal
-  ) {
-    this.descriptionControl.valueChanges.subscribe((value) => {
+  constructor(private fb: FormBuilder, private activeModal: NgbActiveModal) {}
+
+  ngOnInit() {
+    this.rosterForm = this.fb.group({
+      comment: [''],
+      commentType: [''],
+      internal: [false],
+    });
+
+    this.rosterForm.get('comment')?.valueChanges.subscribe((value) => {
       const length = value?.length || 0;
       this.remainingChars = this.maxChars - length;
     });
-  }
- 
 
-  ngOnInit() {
-   
-
+    
   }
-cancel() {
-  this.activeModal.dismiss();
-}
+
+  cancel() {
+    this.activeModal.dismiss();
+  }
+
+  submit() {
+    const formValue = this.rosterForm.value;
+    const payload = {
+      RosterId: 1,
+      EmployeeId: 1,
+      Comments: [
+        {
+          Comment: formValue.comment,
+          CommentType: formValue.commentType,
+          Internal: formValue.internal,
+        },
+      ],
+      StartDate: '2025-06-17',
+      EndDate: '2025-06-17',
+    };
+
+    console.log('Form Payload:', payload);
+    this.activeModal.close(payload);
+  }
 }
