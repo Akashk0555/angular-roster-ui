@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Comment List</h4>
-        <span *ngIf="payload.Comments[0]?.Internal">
+        <span>
           <!-- Internal icon -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@
           <div class="col-3" style="align-content: center">
             <!-- View Button -->
             <div class="col-6">
-              <a type="button" (click)="openModal(payload)">
+              <a type="button" (click)="openModal(comment)">
                 <svg
                   class="view-button"
                   width="100%"

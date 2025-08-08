@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,6 +12,7 @@ export class AddCommentsComponent implements OnInit {
   maxChars = 1000;
   remainingChars = this.maxChars;
 
+  @Input() commentfromlist:any;
   constructor(private fb: FormBuilder, private activeModal: NgbActiveModal) {}
 
   ngOnInit() {
@@ -26,7 +27,13 @@ export class AddCommentsComponent implements OnInit {
       this.remainingChars = this.maxChars - length;
     });
 
-    
+
+      if(this.commentfromlist){
+        console.log(this.commentfromlist.Comment)
+        this.rosterForm.patchValue({
+          comment:this.commentfromlist.Comment
+        })
+      }
   }
 
   cancel() {

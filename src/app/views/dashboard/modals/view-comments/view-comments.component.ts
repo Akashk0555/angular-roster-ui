@@ -10,35 +10,38 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './view-comments.component.scss',
 })
 export class ViewCommentsComponent {
-  selectedComment:any;
+  selectedComment: any;
   payload = {
-      RosterId: 1,
-      EmployeeId: 1,
-      Comments: [
-        {
-          Comment: 'Akash',
-          CommentType: 'type 1',
-          Internal: true,
-        },
-      ],
-      createdDate: '2025-06-17',
-      EndDate: '2025-06-17',
-    }
+    RosterId: 1,
+    EmployeeId: 1,
+    Comments: [
+      {
+        Comment: 'Akash',
+        CommentType: 'type 1',
+        Internal: true,
+      },
+      {
+        Comment: 'Akash1',
+        CommentType: 'type 1',
+        Internal: true,
+      },
+      {
+        Comment: 'Akash2',
+        CommentType: 'type 2',
+        Internal: false,
+      },
+    ],
+    createdDate: '2025-06-17',
+    EndDate: '2025-06-17',
+  };
 
-@Output() commentSelected = new EventEmitter<any>();
-
-  useThisComment(comment: any) {
-    this.commentSelected.emit(comment);
-  }
   constructor(private modalService: NgbModal) {}
 
-  openModal(comment:any) {
-    this.commentSelected.emit(comment);
-    console.log(this.commentSelected)
+  openModal(comment: any) {
     const modalRef = this.modalService.open(AddCommentsComponent, {
       windowClass: 'trans-back',
       backdrop: 'static',
     });
-    
+    modalRef.componentInstance.commentfromlist = comment;
   }
 }

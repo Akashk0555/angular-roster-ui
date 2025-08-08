@@ -188,11 +188,7 @@ export class PrevUsedPatternComponent implements OnInit {
   return rows;
 }
 
-  selectPattern(pattern: any) {
-    // Pass data back to parent modal
-    this.activeModal.close(pattern);
-  }
-
+ 
   // Optionally handle cancel
   cancel() {
     this.activeModal.dismiss();
