@@ -64,9 +64,7 @@
               />
             </div>
             <select class="form-select" formControlName="commentType">
-              <option value="">Select</option>
-              <option value="My Employees">My Employees</option>
-              <option value="My Access">My Access</option>
+              <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
             </select>
           </div>
 

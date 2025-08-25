@@ -17,9 +17,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class UpdatedVersPattComponent implements OnInit {
   prevUsedPattern: any;
   updatedPatternVersion:any;
-  scrollDiv1:any;
-  scrollDiv2:any;
-
+ 
   allVersionPatterns = [
     {
       PatternId: 8,
@@ -410,7 +408,7 @@ export class UpdatedVersPattComponent implements OnInit {
   ];
   private isSyncing = false;
 
-  onScroll(source: HTMLElement, target: HTMLElement, sourceId: string) {
+  onScroll(source: HTMLElement, target: HTMLElement) {
     if (this.isSyncing) return;
 
     this.isSyncing = true;

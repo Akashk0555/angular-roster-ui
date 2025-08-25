@@ -11,7 +11,7 @@ export class AddCommentsComponent implements OnInit {
   rosterForm!: FormGroup;
   maxChars = 1000;
   remainingChars = this.maxChars;
-
+  roles=['type 1','type 2']
   @Input() commentfromlist:any;
   constructor(private fb: FormBuilder, private activeModal: NgbActiveModal) {}
 
@@ -29,9 +29,11 @@ export class AddCommentsComponent implements OnInit {
 
 
       if(this.commentfromlist){
-        console.log(this.commentfromlist.Comment)
+        console.log(this.commentfromlist.CommentType)
         this.rosterForm.patchValue({
-          comment:this.commentfromlist.Comment
+          comment:this.commentfromlist.Comment,
+          commentType:this.commentfromlist.CommentType,
+          internal:this.commentfromlist.Internal
         })
       }
   }
